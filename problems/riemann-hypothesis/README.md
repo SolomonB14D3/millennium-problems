@@ -119,20 +119,72 @@ The "orbital" appearance is simply statistical noise smoothed by GUE correlation
 
 ---
 
+## Interesting Observation: Binary Attractor Model
+
+While the original φ-claims were falsified, one observation is worth noting:
+
+### The Two Attractors
+
+The spacing ratio median appears to transition between two values:
+
+| Attractor | Value | Dominates at |
+|-----------|-------|--------------|
+| **1/φ** | 0.6180 | Low heights (~10⁴) |
+| **GUE** | 0.6050 | High heights (~10¹²) |
+| Barycenter | 0.6115 | — |
+
+### Observed Behavior (zeros1, heights 14–75,000)
+
+```
+Mean median: 0.6195 (closest to 1/φ)
+Position breakdown:
+  - Below GUE: 2%
+  - Between GUE and 1/φ: 42%
+  - Above 1/φ: 56%
+
+Crossings:
+  - Crosses 1/φ: 73 times
+  - Crosses GUE: 4 times
+```
+
+At low heights, the median **orbits around 1/φ**, rarely approaching GUE.
+
+At high heights (zeros3, ~10¹²), the median **collapses to GUE** (~0.605).
+
+### Phase Space Structure
+
+In the (distance-from-GUE, distance-from-1/φ) phase space, the median follows a **diagonal path** — not random noise, but a structured trajectory between the two attractors.
+
+![Binary Attractor](figures/binary_attractor.png)
+
+### Interpretation
+
+This suggests a **finite-size transition**:
+- At finite heights: 1/φ acts as an attractor (possibly coincidentally)
+- As height → ∞: GUE universality takes over
+- The transition is smooth, following a constrained path
+
+**Caveat**: This does not constitute evidence for φ-structure in Riemann. The proximity to 1/φ at low heights is likely a finite-size GUE effect that happens to land near a famous constant. The key point is that it **doesn't persist** — the system escapes to GUE at high heights.
+
+This contrasts with P vs NP, where φ-structure **strengthens** with problem size.
+
+---
+
 ## Conclusion
 
-**The Riemann Hypothesis has no verified connection to the golden ratio.**
+**The Riemann Hypothesis has no robust connection to the golden ratio.**
 
-The spacing ratio statistics follow GUE random matrix universality. The proximity of the median to 1/φ at low heights is a finite-size coincidence that disappears at high heights.
+The spacing ratio statistics follow GUE random matrix universality. The proximity of the median to 1/φ at low heights is a finite-size effect that disappears at high heights.
 
-Unlike P vs NP (where falsifying the original claim led to discovering a deeper φ-structure), Riemann shows no salvageable φ-connection. The hypothesis space has been thoroughly explored:
+Unlike P vs NP (where falsifying the original claim led to discovering a deeper φ-structure), Riemann shows no salvageable φ-connection:
 
-- Mode: Not at 1/φ
+- Mode: Not at 1/φ (7.4% off)
 - Excess at 1/φ: None detected
-- Median: Finite-N coincidence, escapes at high heights
+- Median: Near 1/φ at low heights, escapes to GUE at high heights
 - Oscillations: Noise, not signal
+- Binary attractor: Interesting but not persistent
 
-**Status: NO EVIDENCE FOR φ-STRUCTURE**
+**Status: FALSIFIED (with interesting finite-size observation)**
 
 ---
 
