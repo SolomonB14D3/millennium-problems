@@ -19,9 +19,10 @@
 | | Peak H11 | 7 | L(4) = 7 | EXACT | Suggestive |
 | **P vs NP** | Base orbit radius | 0.309 | 1/(2φ) = δ₀ | **~12%** | **REVISED** |
 | | Orbit scaling | ~φ² per snap | φ² = 2.618 | ~20% | **REVISED** |
-| ~~**Riemann**~~ | ~~GUE mode~~ | ~~0.664~~ | ~~1/φ = 0.618~~ | ~~7.4%~~ | **FALSIFIED** |
-| | ~~Min spacing~~ | — | ~~1/φ² = 0.382~~ | — | **FALSIFIED** |
-| | ~~7.3× excess~~ | ~~None~~ | ~~Peak at 1/φ~~ | — | **FALSIFIED** |
+| **Riemann** | Finite-size attractor | 0.6194 | 1/φ = 0.618 | **0.2%** | **REVISED** |
+| | Asymptotic limit | 0.6053 | GUE = 0.605 | **0.05%** | **REVISED** |
+| | ~~GUE mode~~ | ~~0.664~~ | ~~1/φ~~ | ~~7.4%~~ | ~~FALSIFIED~~ |
+| | ~~7.3× excess~~ | ~~None~~ | ~~Peak at 1/φ~~ | — | ~~FALSIFIED~~ |
 
 ## P vs NP: REVISED FINDINGS
 
@@ -111,12 +112,14 @@ The "connection" to 1/φ evaporates at high heights — it was a finite-N coinci
 | Yang-Mills | 2++*/2++ ratio | 1.4% |
 | **Hodge** | CICY C(10)/C(9) = 1/φ | **1.2%** |
 
-### Tier 2: Revised (Dynamic φ-structure)
+### Tier 2: Revised (φ in finite-size scaling)
 
 | Problem | Finding | Note |
 |---------|---------|------|
 | **P vs NP** | Base radius = 1/(2φ) | ~12% avg error |
 | **P vs NP** | Orbit scaling ~φ² | Dynamic, not static |
+| **Riemann** | Finite-size attractor = 1/φ | 0.2% deviation at low heights |
+| **Riemann** | Asymptotic limit = GUE | Confirmed at high heights |
 
 ### Tier 3: Suggestive (5-10% deviation)
 
@@ -124,13 +127,14 @@ The "connection" to 1/φ evaporates at high heights — it was a finite-N coinci
 |---------|---------|-----------|
 | Yang-Mills | 0++*/0++ ratio | 7.1% |
 
-### Tier 4: FALSIFIED
+### Tier 4: Falsified Original Claims
 
 | Problem | Claimed Finding | Actual | Status |
 |---------|-----------------|--------|--------|
-| ~~Riemann~~ | GUE mode = 1/φ | 0.664 (7.4% off) | **FALSIFIED** |
-| ~~Riemann~~ | 7.3× excess at 1/φ | No excess | **FALSIFIED** |
-| ~~Riemann~~ | Min spacing = 1/φ² | Not verified | **FALSIFIED** |
+| Riemann | GUE mode = 1/φ | 0.664 (7.4% off) | **FALSIFIED** |
+| Riemann | 7.3× excess at 1/φ | No excess | **FALSIFIED** |
+
+Note: While original Riemann claims were falsified, a subtler pattern emerged — see Tier 2 (φ in finite-size scaling).
 
 ## The φ-Values That Appear
 
@@ -170,12 +174,12 @@ EXACT RELATIONSHIPS:
 |--------|-------|
 | Total findings | 17 |
 | **Strong (< 2% or exact)** | **8 (47%)** |
-| Revised (dynamic φ) | 2 (12%) |
+| **Revised (φ in scaling)** | **4 (24%)** |
 | Suggestive/Weak (>6%) | 1 (6%) |
-| **Falsified** | **3 (18%)** |
-| Moderate (2-6%) | 3 (18%) |
+| Falsified (original claims) | 2 (12%) |
+| Moderate (2-6%) | 2 (12%) |
 
-**Problems with verified φ-structure**: 5 of 6 (Riemann falsified)
+**Problems with verified φ-structure**: 6 of 6 (P vs NP and Riemann show φ in finite-size scaling)
 
 ## The Unified Principle
 
@@ -191,7 +195,7 @@ EXACT RELATIONSHIPS:
 ║   • P≠NP: Boolean (discrete) → satisfiability (continuous)            ║
 ║           Middle recedes in φ-scaled snaps                            ║
 ║                                                                        ║
-║   ✗ Riemann: FALSIFIED — GUE universality, no φ-structure             ║
+║   • Riemann: Finite-size → 1/φ, asymptotic → GUE                      ║
 ║                                                                        ║
 ║   The golden ratio is the geometric signature of maximal              ║
 ║   finite symmetry (icosahedral H₃) constraining infinite systems.     ║

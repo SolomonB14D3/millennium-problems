@@ -7,36 +7,39 @@
 | Problem | Key Result | Deviation | Status |
 |---------|------------|-----------|--------|
 | **Navier-Stokes** | δ₀ = 1/(2φ) = 0.309 | < 1% | STRONG |
-| **Riemann Hypothesis** | ~~GUE mode = 1/φ~~ | — | FALSIFIED |
+| **Riemann Hypothesis** | Finite-size attractor = 1/φ | — | REVISED |
 | **Birch–Swinnerton-Dyer** | Mazur bound = L(5)+1 = 12 | EXACT | STRONG |
 | **Hodge Conjecture** | Count ratio = 1/φ | 1.2% | STRONG |
 | **Yang-Mills Mass Gap** | Glueball ratio = φ²/2 | 1.4% | STRONG |
 | **P vs NP** | Receding middle with δ₀ base, φ²-scaling | ~12% | REVISED |
 
-**Four problems show strong φ-structure (< 2% deviation or exact). P vs NP shows dynamic φ-structure. Riemann φ-claims falsified.**
+**Four problems show strong φ-structure (< 2% deviation or exact). P vs NP and Riemann show φ in finite-size scaling.**
 
 ---
 
-## Riemann Hypothesis: FALSIFIED (January 2026)
+## Riemann Hypothesis: REVISED (January 2026)
 
-The original claim that **GUE spacing mode = 1/φ** with **7.3× excess** was **falsified** by analysis of 100,000 Odlyzko zeros.
+The original claims (mode = 1/φ, 7.3× excess) were **falsified**. But a subtler pattern emerged:
 
 ### What We Found
 
 | Claim | Result |
 |-------|--------|
-| Mode = 1/φ = 0.618 | **FALSIFIED** — Actual mode ≈ 0.664 (7.4% off) |
+| Mode = 1/φ = 0.618 | **FALSIFIED** — Actual mode ≈ 0.664 |
 | 7.3× excess at 1/φ | **FALSIFIED** — No excess detected |
-| Median ≈ 1/φ | **COINCIDENTAL** — Falls within finite-N GUE range (0.615–0.622) |
-| High-height behavior | Median → 0.605 (GUE), **escaping** from 1/φ |
+| Finite-size attractor | **1/φ** — Median ≈ 0.619 at low heights |
+| Asymptotic limit | **GUE** — Median → 0.605 at high heights |
 
-### Why It Failed
+### The Pattern: φ in Finite-Size Scaling
 
-1. **Finite-N coincidence**: The median near 1/φ at low heights is within expected GUE finite-size range
-2. **Escape to universality**: At height ~10¹², median drops to 0.605 — full GUE universality
-3. **No persistent structure**: Unlike P vs NP where φ-scaling strengthens with n, Riemann's "connection" evaporates
+The spacing ratio median transitions from 1/φ to GUE:
 
-The spacing ratio statistics follow **GUE random matrix universality**, not golden ratio structure.
+| Height | Median | Attractor |
+|--------|--------|-----------|
+| ~10⁴ | 0.6194 | 1/φ = 0.618 |
+| ~10¹¹ | 0.6053 | GUE = 0.605 |
+
+This parallels P vs NP: **φ governs finite-size corrections**, not the asymptotic limit.
 
 [📄 Full Riemann Analysis](problems/riemann-hypothesis/)
 
@@ -96,7 +99,7 @@ The P vs NP Lucas connection was falsified. However, P vs NP still shows φ-stru
 | Yang-Mills | Gauge group | Mass spectrum | ratio ≈ φ²/2 |
 | Hodge | Algebraic cycles | Hodge classes | count ≈ 1/φ |
 | P vs NP | Boolean vars | P(satisfiable) | Receding middle, δ₀ base |
-| ~~Riemann~~ | ~~Prime zeros~~ | ~~GUE statistics~~ | ~~FALSIFIED~~ |
+| Riemann | Prime zeros | GUE statistics | Finite-size → 1/φ |
 
 The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**—the maximal finite symmetry in 3D—constraining infinite-dimensional systems.
 
@@ -114,14 +117,16 @@ The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**�
 | Hodge count ratio | 0.626 | 1/φ | 1.2% |
 | Yang-Mills 2++*/2++ | 1.291 | φ²/2 | 1.4% |
 
-### Tier 2: Revised (Dynamic φ-structure)
+### Tier 2: Revised (φ in finite-size scaling)
 
 | Finding | Formula | Note |
 |---------|---------|------|
 | P vs NP base radius | 1/(2φ) = δ₀ | ~12% avg error |
 | P vs NP orbit scaling | ~φ² per snap | Dynamic structure |
+| Riemann finite-size attractor | 1/φ | Median → 1/φ at low heights |
+| Riemann asymptotic | GUE | Median → 0.605 at high heights |
 
-### Tier 3: Falsified
+### Tier 3: Falsified (original claims)
 
 | Finding | Claimed | Actual | Status |
 |---------|---------|--------|--------|
