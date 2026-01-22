@@ -1,0 +1,209 @@
+diff --git a/src/phi.h b/src/phi.h
+new file mode 100644
+--- /dev/null
++++ b/src/phi.h
+@@ -0,0 +1,45 @@
++/* φ-Guided Restart Policy - see phi.c for implementation */
++#ifndef _phi_h_INCLUDED
++#define _phi_h_INCLUDED
++
++#include <stdbool.h>
++#include <stdint.h>
++
++double phi_predict_alpha_c(unsigned n);
++double phi_distance(unsigned remaining_vars, unsigned remaining_clauses);
++bool phi_should_restart(unsigned remaining_vars, unsigned remaining_clauses,
++                        uint64_t conflicts, uint64_t base_interval);
++bool phi_early_sat_possible(unsigned remaining_vars, unsigned remaining_clauses,
++                            unsigned original_vars, double progress);
++
++typedef struct phi_config {
++    bool enabled;
++    double early_sat_threshold;
++    double danger_zone;
++    double restart_multiplier;
++    double min_progress;
++} phi_config;
++
++extern phi_config PHI_CONFIG;
++void phi_init(void);
++
++#endif
+
+diff --git a/src/phi.c b/src/phi.c
+new file mode 100644
+--- /dev/null
++++ b/src/phi.c
+@@ -0,0 +1,85 @@
++/* φ-Guided Restart Policy - Phase transition model for random 3-SAT */
++#include "phi.h"
++#include <math.h>
++
++phi_config PHI_CONFIG;
++
++static const struct { unsigned n; double alpha_c; } ALPHA_C_TABLE[] = {
++    {20, 2.50}, {50, 3.00}, {100, 3.20}, {200, 3.40}, {500, 3.57},
++    {1000, 3.90}, {2000, 4.10}, {4000, 4.20}, {8000, 4.25}, {0, 4.267}
++};
++
++void phi_init(void) {
++    PHI_CONFIG.enabled = true;
++    PHI_CONFIG.early_sat_threshold = -0.5;
++    PHI_CONFIG.danger_zone = 0.15;
++    PHI_CONFIG.restart_multiplier = 0.5;
++    PHI_CONFIG.min_progress = 0.3;
++}
++
++double phi_predict_alpha_c(unsigned n) {
++    if (n == 0) return 4.267;
++    unsigned i = 0;
++    while (ALPHA_C_TABLE[i+1].n != 0 && ALPHA_C_TABLE[i+1].n < n) i++;
++    if (n <= ALPHA_C_TABLE[0].n) return ALPHA_C_TABLE[0].alpha_c;
++    if (ALPHA_C_TABLE[i+1].n == 0) return ALPHA_C_TABLE[i].alpha_c;
++    unsigned n1 = ALPHA_C_TABLE[i].n, n2 = ALPHA_C_TABLE[i+1].n;
++    double a1 = ALPHA_C_TABLE[i].alpha_c, a2 = ALPHA_C_TABLE[i+1].alpha_c;
++    double t = (log((double)n) - log((double)n1)) / (log((double)n2) - log((double)n1));
++    return a1 + t * (a2 - a1);
++}
++
++double phi_distance(unsigned remaining_vars, unsigned remaining_clauses) {
++    if (remaining_vars == 0) return (remaining_clauses > 0) ? 1000.0 : -1000.0;
++    double alpha = (double)remaining_clauses / (double)remaining_vars;
++    double alpha_c = phi_predict_alpha_c(remaining_vars);
++    return (alpha - alpha_c) / alpha_c;
++}
++
++bool phi_should_restart(unsigned rv, unsigned rc, uint64_t conflicts, uint64_t base) {
++    if (!PHI_CONFIG.enabled) return conflicts >= base;
++    double distance = phi_distance(rv, rc);
++    if (fabs(distance) < PHI_CONFIG.danger_zone) {
++        return conflicts >= (uint64_t)(base * PHI_CONFIG.restart_multiplier);
++    }
++    return conflicts >= base;
++}
++
++bool phi_early_sat_possible(unsigned rv, unsigned rc, unsigned orig, double prog) {
++    if (!PHI_CONFIG.enabled || prog < PHI_CONFIG.min_progress) return false;
++    return phi_distance(rv, rc) < PHI_CONFIG.early_sat_threshold;
++}
+
+diff --git a/src/application.c b/src/application.c
+--- a/src/application.c
++++ b/src/application.c
+@@ -1,5 +1,6 @@
+ #include "application.h"
+ #include "parse.h"
++#include "phi.h"
+
+ // ... existing includes ...
+
+@@ -50,6 +51,9 @@ int kissat_application(int argc, char **argv) {
+     // ... existing initialization ...
+
++    // Initialize φ-enhancement
++    phi_init();
++
+     kissat *solver = kissat_init();
+
+diff --git a/src/restart.c b/src/restart.c
+--- a/src/restart.c
++++ b/src/restart.c
+@@ -1,5 +1,6 @@
+ #include "restart.h"
+ #include "internal.h"
++#include "phi.h"
+
+ // ... existing code ...
+
+@@ -45,6 +46,21 @@ bool kissat_restarting(kissat *solver) {
+
+     uint64_t conflicts = CONFLICTS;
+     uint64_t interval = solver->restart_interval;
++
++    // ══════════════════════════════════════════════════════════════
++    // φ-ENHANCEMENT: Phase transition aware restart
++    // ══════════════════════════════════════════════════════════════
++    if (PHI_CONFIG.enabled) {
++        unsigned remaining_vars = solver->active;  // Unassigned variables
++        unsigned remaining_clauses = solver->clauses.count - solver->satisfied;
++
++        if (phi_should_restart(remaining_vars, remaining_clauses,
++                               conflicts, interval)) {
++            LOG("φ-restart triggered (distance=%.2f)",
++                phi_distance(remaining_vars, remaining_clauses));
++            return true;
++        }
++    }
+
+     // ... existing restart logic ...
+
+diff --git a/src/search.c b/src/search.c
+--- a/src/search.c
++++ b/src/search.c
+@@ -1,5 +1,6 @@
+ #include "search.h"
+ #include "decide.h"
++#include "phi.h"
+
+ // ... existing code ...
+
+@@ -120,6 +121,25 @@ int kissat_search(kissat *solver) {
+         if (result == 20) break;  // UNSAT
+         if (result == 10) break;  // SAT
+
++        // ══════════════════════════════════════════════════════════
++        // φ-ENHANCEMENT: Early SAT detection
++        // ══════════════════════════════════════════════════════════
++        if (PHI_CONFIG.enabled && solver->level > 0) {
++            unsigned remaining_vars = solver->active;
++            unsigned remaining_clauses = solver->clauses.count - solver->satisfied;
++            unsigned original_vars = solver->vars;
++            double progress = 1.0 - (double)remaining_vars / original_vars;
++
++            if (phi_early_sat_possible(remaining_vars, remaining_clauses,
++                                       original_vars, progress)) {
++                LOG("φ-early-SAT: α=%.2f << α_c=%.2f, completing greedily",
++                    (double)remaining_clauses / remaining_vars,
++                    phi_predict_alpha_c(remaining_vars));
++                // Complete remaining assignments greedily
++                result = kissat_complete_greedily(solver);
++                break;
++            }
++        }
++
+         // ... existing search loop ...
+     }
+
+diff --git a/src/options.c b/src/options.c
+--- a/src/options.c
++++ b/src/options.c
+@@ -1,4 +1,5 @@
+ #include "options.h"
++#include "phi.h"
+
+ // Add to option definitions:
+
+@@ -150,6 +151,7 @@ static const struct opt OPTIONS[] = {
+     {"phase", 1, 0, 1, "initial phase (0=neg, 1=pos)"},
++    {"phi", 1, 0, 1, "enable φ-guided restarts (0=off, 1=on)"},
+     {"probe", 1, 0, 1, "enable probing"},
+
+ // ... existing options ...
+@@ -200,6 +201,9 @@ void kissat_set_option(kissat *solver, const char *name, int value) {
+     // ... existing option handling ...
+
++    if (!strcmp(name, "phi")) {
++        PHI_CONFIG.enabled = (value != 0);
++    }
++
+ }
+
+diff --git a/src/Makefile b/src/Makefile
+--- a/src/Makefile
++++ b/src/Makefile
+@@ -25,6 +25,7 @@ OBJS = \
+     options.o \
+     parse.o \
++    phi.o \
+     probe.o \
+     propagate.o \
