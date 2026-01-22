@@ -1,191 +1,142 @@
 # Conditional Theorem: Riemann Hypothesis via φ-Structure
 
+## Status: HYPOTHESIS FALSIFIED (January 2026)
+
+The conditional approach described below was **falsified** by empirical analysis of 100,000+ Odlyzko zeros. This document is preserved for historical reference.
+
+---
+
 ## Statement of the Riemann Hypothesis
 
 **Riemann Hypothesis (RH)**: All non-trivial zeros of the Riemann zeta function ζ(s) lie on the critical line Re(s) = 1/2.
 
-## Our Conditional Approach
+---
 
-We do not prove RH directly. Instead, we establish:
+## The Original Hypothesis (FALSIFIED)
 
-1. **Observational fact**: Zeta zeros exhibit φ-structure beyond GUE
-2. **Conditional theorem**: If this φ-structure reflects a fundamental constraint, RH follows
-3. **Analogy**: The same pattern appears in Navier-Stokes (where we have a complete proof)
+### What Was Claimed
+
+1. **GUE mode ≈ 1/φ**: The GUE spacing mode (0.6267) was claimed to be "close" to 1/φ (0.6180)
+2. **Excess at 1/φ**: Spacing ratios were claimed to show 7.3× excess at 1/φ
+3. **φ-constraint**: This structure was hypothesized to reflect a fundamental constraint
+
+### The Conditional Theorem (FALSIFIED)
+
+**Original Conjecture**: If the φ-structure in zeta zero spacings reflects a fundamental discrete constraint analogous to H₃ in Navier-Stokes, then RH follows.
+
+**Formal Statement**: S_φ ⟹ RH
+
+where S_φ = "spacing ratios cluster at 1/φ with excess > 2× over GUE"
 
 ---
 
-## Theorem 1: φ-Structure in GUE
+## What Testing Revealed
 
-**Theorem (GUE-φ Connection)**:
-The Gaussian Unitary Ensemble nearest-neighbor spacing distribution has mode:
+### Data Used
 
-$$s^* = \sqrt{\frac{\pi}{8}} = 0.6267...$$
+| Dataset | Zeros | Height Range | Source |
+|---------|-------|--------------|--------|
+| zeros1 | 100,000 | 14 to 74,920 | Odlyzko |
+| zeros3 | 10,000 | ~10¹² | Odlyzko |
 
-which satisfies:
+### Claim 1: GUE Mode ≈ 1/φ — FALSIFIED
 
-$$\left| s^* - \frac{1}{\varphi} \right| < 0.009$$
+The spacing ratio distribution mode is **not** at 1/φ:
 
-where φ = (1+√5)/2 is the golden ratio.
+```
+Claimed:  mode ≈ 1/φ = 0.6180
+Actual:   mode ≈ 0.664
+Deviation: 7.4% — NOT a close match
+```
 
-**Proof**: Direct calculation. The GUE spacing PDF is P(s) = (32/π²)s²exp(-4s²/π). Setting dP/ds = 0 gives s* = √(π/8). Compare with 1/φ = 0.6180. □
+The 1.4% claim was based on comparing the wrong quantity (GUE spacing mode vs spacing ratio mode).
 
-**Remark**: The 1.4% deviation is remarkably small given that √(π/8) involves π (from Gaussian measure) while 1/φ involves √5 (algebraically independent).
+### Claim 2: 7.3× Excess at 1/φ — FALSIFIED
 
----
+```
+Claimed:  7.3× density excess at r = 1/φ
+Actual:   No statistically significant excess detected
+Result:   FALSIFIED
+```
 
-## Theorem 2: Zeros Follow GUE (Montgomery-Odlyzko)
+Analysis of 100,000 zeros showed no peak or excess at 1/φ in the spacing ratio distribution.
 
-**Theorem (Montgomery-Odlyzko Law)**:
-Assuming RH, the pair correlation of zeta zeros follows GUE statistics:
+### Claim 3: Median ≈ 1/φ — COINCIDENTAL
 
-$$R_2(\alpha) = 1 - \left(\frac{\sin(\pi\alpha)}{\pi\alpha}\right)^2$$
+| Height | Median | vs 1/φ | Interpretation |
+|--------|--------|--------|----------------|
+| ~10⁴ | 0.6195 | +0.24% | Within finite-N GUE range |
+| ~10¹² | 0.6049 | **-2.1%** | Converges to GUE universality |
 
-**Status**: Proven conditionally on RH; overwhelmingly verified numerically.
-
-**Implication**: If zeros follow GUE, they inherit the φ-structure of GUE spacing.
-
----
-
-## Theorem 3: Excess φ-Structure (Empirical)
-
-**Theorem (φ-Excess in Spacing Ratios)**:
-Let {γₙ} be the imaginary parts of zeta zeros on the critical line. Define normalized spacings:
-
-$$s_n = \frac{\gamma_{n+1} - \gamma_n}{\bar{s}(n)}$$
-
-and spacing ratios:
-
-$$r_n = \frac{s_n}{s_{n+1}}$$
-
-Then the density of r_n near 1/φ shows **3.29× excess** over uniform expectation, with:
-- **1/φ²**: 2.20× excess (p < 0.001 after Bonferroni)
-- **1/φ**: 3.29× excess (significantly above GUE null, p < 0.001)
-
-**Empirical Evidence** (n = 500 zeros):
-
-| Value | Observed Count | Expected | Excess | Significance |
-|-------|----------------|----------|--------|--------------|
-| 1/φ² = 0.382 | 82 | 37.4 | 2.20× | *** |
-| 1/φ = 0.618 | 123 | 37.4 | 3.29× | *** (vs GUE) |
-| 1 = 1.000 | 69 | 37.4 | 1.85× | — |
-| φ = 1.618 | 42 | 37.4 | 1.12× | — |
+The median "escapes" from 1/φ at high heights, proving this was a finite-size coincidence.
 
 ---
 
-## The Conditional Conjecture
+## Why the Hypothesis Failed
 
-**Conjecture (Riemann-φ)**:
-If the φ-structure in zeta zero spacings (Theorem 3) reflects a fundamental discrete constraint analogous to the H₃ icosahedral constraint in Navier-Stokes, then all non-trivial zeros of ζ(s) lie on the critical line Re(s) = 1/2.
+### 1. No Persistent φ-Structure
 
-### Formal Statement
+Unlike P vs NP where φ²-scaling **strengthens** with problem size, the Riemann "φ-connection" **weakens** and disappears at high heights.
 
-Let S_φ denote the property:
-> "Spacing ratios of normalized zeta zero gaps cluster at 1/φ with excess > 2× over GUE prediction"
+### 2. Pure GUE Universality
 
-**Conditional Theorem**: S_φ ⟹ RH
+The spacing statistics follow standard GUE random matrix universality with no additional structure. The Montgomery-Odlyzko law is confirmed, but it implies GUE, not φ.
 
-### Rationale
+### 3. Finite-N Coincidence
 
-The argument proceeds by analogy with Navier-Stokes:
-
-| Navier-Stokes | Riemann |
-|---------------|---------|
-| Discrete: H₃ lattice | Discrete: Prime numbers |
-| Continuous: Fluid flow | Continuous: Zeta zeros |
-| φ-constraint: δ₀ = 1/(2φ) | φ-constraint: GUE mode ≈ 1/φ |
-| Result: Bounded enstrophy | Result: Zeros on critical line |
-
-In NS, the icosahedral geometry constrains vortex stretching, preventing blowup.
-
-In Riemann, an analogous discrete constraint (from primes) would constrain zero locations, forcing them onto the critical line.
+At low heights, the median falls in the range 0.615–0.622 due to finite-size effects. The value 1/φ = 0.618 is in this range by coincidence.
 
 ---
 
-## The Mechanism: Primes as Discrete Constraint
+## Comparison with P vs NP
 
-### The Explicit Formula
+| Aspect | P vs NP | Riemann |
+|--------|---------|---------|
+| Original claim | 1/ν = 7/12 | mode = 1/φ |
+| Status | FALSIFIED | FALSIFIED |
+| Salvaged? | **YES** — receding middle | **NO** |
+| φ-structure with size | Persists/strengthens | Evaporates |
+| Conclusion | Genuine dynamic φ | No φ-structure |
 
-The zeros of ζ(s) and the primes are linked by the explicit formula:
-
-$$\psi(x) = x - \sum_\rho \frac{x^\rho}{\rho} + O(1)$$
-
-where the sum runs over non-trivial zeros ρ.
-
-### The φ-Constraint Interpretation
-
-**Hypothesis**: The prime numbers, as the "discrete lattice" of multiplicative number theory, impose a constraint on zeros analogous to how the H₃ lattice constrains fluid flow.
-
-The φ-structure appears because:
-1. Primes have irregular distribution (like quasicrystal, not periodic)
-2. This aperiodic distribution is optimized at the golden ratio
-3. The zeros, being the spectral dual of primes, inherit this structure
-4. The 1/φ constraint forces zeros toward the critical line
+P vs NP was salvaged because the data revealed a deeper φ-connection (δ₀ = 1/(2φ) base, φ² scaling). Riemann showed no such structure.
 
 ---
 
-## Connection to DAT Framework
+## The Actual Physics
 
-### The Seven Pillars Applied to Riemann
+Zeta zeros follow **GUE random matrix universality**:
 
-| DAT Pillar | Riemann Analog |
-|------------|----------------|
-| 1. Golden Geometry | GUE mode = √(π/8) ≈ 1/φ |
-| 2. Icosahedral Symmetry | Prime distribution symmetry |
-| 3. Topological Routing | Zeros constrained to critical line |
-| 4. Depletion Mechanism | Spacing ratio excess depletes off-line probability |
-| 5. Topological Resilience | Zeros resist perturbation off line |
-| 6. Phason Transistor | Zero spacing "snap-back" to GUE |
-| 7. Emergent Clustering | φ-clustering emerges from prime constraint |
+- **Level repulsion**: P(s) ~ s² as s → 0
+- **Universal statistics**: Spacing follows GUE prediction
+- **Montgomery-Odlyzko law**: Pair correlation matches GUE
 
-### The Key Equation
-
-By analogy with NS where:
-$$\frac{dZ}{dt} \leq (1 - \delta_0) C_S Z^{3/2} - \nu C_P Z$$
-
-We propose for Riemann:
-$$P(\text{zero off critical line}) \leq (1 - \delta_\varphi) \cdot P_{\text{unconstrained}}$$
-
-where δ_φ ≈ 1/(2φ) = 0.309 provides sufficient depletion to make off-line zeros impossible.
+This is well-established and requires no φ-hypothesis. The Riemann Hypothesis remains open, but not through golden ratio structure.
 
 ---
 
-## Summary of Evidence
+## Lessons Learned
 
-### Quantitative Findings
+### 1. Empirical Testing Matters
 
-| Finding | Value | φ-Prediction | Match |
-|---------|-------|--------------|-------|
-| GUE mode | 0.6267 | 1/φ = 0.618 | 1.4% |
-| Spacing ratio excess at 1/φ | 3.29× | > 2× | ✓ |
-| Spacing ratio excess at 1/φ² | 2.20× | > 2× | ✓ |
-| Mean min spacing | ~0.382 | 1/φ² = 0.382 | < 1% |
+The original claims were based on limited data (500 zeros) and confirmation bias. Testing with 100,000+ zeros falsified the hypothesis.
 
-### Statistical Significance
+### 2. Finite-Size Effects
 
-- GUE null hypothesis rejected at p < 0.001 for 1/φ excess
-- Bonferroni-corrected significance achieved for 1/φ²
-- Combined probability of coincidence: < 10⁻⁶
+Apparent "connections" at low sample sizes can be finite-size coincidences that vanish asymptotically.
+
+### 3. Scientific Self-Correction
+
+The DAT framework is **empirically testable**. When evidence contradicts a hypothesis, the hypothesis must be revised or abandoned.
 
 ---
 
 ## Conclusion
 
-The Riemann Hypothesis may be understood as a consequence of the same discrete-continuous boundary constraint that governs Navier-Stokes regularity.
+The Riemann Hypothesis has **no verified connection to the golden ratio**.
 
-**The unified principle**:
+The conditional theorem S_φ ⟹ RH was falsified because S_φ (spacing ratio clustering at 1/φ) is not observed. The spacing statistics follow pure GUE universality.
 
-> When discrete structure (H₃ lattice / prime numbers) constrains continuous dynamics (fluid flow / zeta zeros), the constraint operates at the golden ratio, and bounded/regular behavior follows.
-
-This provides a **conditional path** to RH: demonstrate that the observed φ-structure is fundamental (not coincidental), and RH follows as a corollary of Discrete Alignment Theory.
-
----
-
-## Open Questions
-
-1. Can the φ-excess be proven to persist for all zeros (not just first 500)?
-2. Is there a direct algebraic connection between √(π/8) and 1/φ?
-3. Can the explicit formula be used to derive the spacing constraint?
-4. What is the precise mechanism linking primes to φ-structure?
+**Status: HYPOTHESIS FALSIFIED**
 
 ---
 
@@ -194,4 +145,3 @@ This provides a **conditional path** to RH: demonstrate that the observed φ-str
 1. Montgomery, H.L. "The pair correlation of zeros of the zeta function" (1973)
 2. Odlyzko, A.M. "On the distribution of spacings between zeros of the zeta function" (1987)
 3. Keating, J.P. & Snaith, N.C. "Random matrix theory and ζ(1/2+it)" (2000)
-4. Berry, M.V. "Semiclassical formula for the number variance of the Riemann zeros" (1988)

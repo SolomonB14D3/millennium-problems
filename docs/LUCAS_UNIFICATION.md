@@ -116,5 +116,8 @@ This shows the DAT framework is **empirically testable** and self-correcting.
 
 1. Why do L(4) and L(5) appear specifically in BSD and Hodge?
 2. Is there a deeper number-theoretic reason for these connections?
-3. Do other Millennium Problems have hidden Lucas structure?
-4. Why does P vs NP show dynamic φ-structure rather than static?
+3. Why does P vs NP show dynamic φ-structure rather than static?
+
+## Note on Riemann Hypothesis
+
+The Riemann Hypothesis was never claimed to have Lucas structure, but its claimed φ-connection (GUE mode = 1/φ) was also **falsified** in January 2026. The spacing statistics follow pure GUE random matrix universality with no detectable golden ratio structure. See [EVIDENCE_TABLE.md](EVIDENCE_TABLE.md) for details.

@@ -1,19 +1,44 @@
 # φ and the Millennium Problems
 
-**All six Clay Millennium Prize Problems show structure related to the golden ratio φ = (1+√5)/2.**
+**Five of six Clay Millennium Prize Problems show structure related to the golden ratio φ = (1+√5)/2.**
 
 ## Key Finding
 
 | Problem | Key Result | Deviation | Status |
 |---------|------------|-----------|--------|
 | **Navier-Stokes** | δ₀ = 1/(2φ) = 0.309 | < 1% | STRONG |
-| **Riemann Hypothesis** | GUE mode = 1/φ = 0.618 | 1.4% | STRONG |
+| **Riemann Hypothesis** | ~~GUE mode = 1/φ~~ | — | FALSIFIED |
 | **Birch–Swinnerton-Dyer** | Mazur bound = L(5)+1 = 12 | EXACT | STRONG |
 | **Hodge Conjecture** | Count ratio = 1/φ | 1.2% | STRONG |
 | **Yang-Mills Mass Gap** | Glueball ratio = φ²/2 | 1.4% | STRONG |
 | **P vs NP** | Receding middle with δ₀ base, φ²-scaling | ~12% | REVISED |
 
-**Five problems show strong φ-structure (< 2% deviation or exact). P vs NP shows dynamic φ-structure.**
+**Four problems show strong φ-structure (< 2% deviation or exact). P vs NP shows dynamic φ-structure. Riemann φ-claims falsified.**
+
+---
+
+## Riemann Hypothesis: FALSIFIED (January 2026)
+
+The original claim that **GUE spacing mode = 1/φ** with **7.3× excess** was **falsified** by analysis of 100,000 Odlyzko zeros.
+
+### What We Found
+
+| Claim | Result |
+|-------|--------|
+| Mode = 1/φ = 0.618 | **FALSIFIED** — Actual mode ≈ 0.664 (7.4% off) |
+| 7.3× excess at 1/φ | **FALSIFIED** — No excess detected |
+| Median ≈ 1/φ | **COINCIDENTAL** — Falls within finite-N GUE range (0.615–0.622) |
+| High-height behavior | Median → 0.605 (GUE), **escaping** from 1/φ |
+
+### Why It Failed
+
+1. **Finite-N coincidence**: The median near 1/φ at low heights is within expected GUE finite-size range
+2. **Escape to universality**: At height ~10¹², median drops to 0.605 — full GUE universality
+3. **No persistent structure**: Unlike P vs NP where φ-scaling strengthens with n, Riemann's "connection" evaporates
+
+The spacing ratio statistics follow **GUE random matrix universality**, not golden ratio structure.
+
+[📄 Full Riemann Analysis](problems/riemann-hypothesis/)
 
 ---
 
@@ -67,11 +92,11 @@ The P vs NP Lucas connection was falsified. However, P vs NP still shows φ-stru
 | Problem | Discrete Structure | Continuous Dynamics | φ-Constraint |
 |---------|-------------------|---------------------|--------------|
 | Navier-Stokes | H₃ lattice | Fluid velocity | δ₀ = 1/(2φ) |
-| Riemann | Prime zeros | GUE statistics | mode = 1/φ |
 | BSD | Torsion points | L-function rank | Mazur = L(5)+1 |
 | Yang-Mills | Gauge group | Mass spectrum | ratio ≈ φ²/2 |
 | Hodge | Algebraic cycles | Hodge classes | count ≈ 1/φ |
 | P vs NP | Boolean vars | P(satisfiable) | Receding middle, δ₀ base |
+| ~~Riemann~~ | ~~Prime zeros~~ | ~~GUE statistics~~ | ~~FALSIFIED~~ |
 
 The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**—the maximal finite symmetry in 3D—constraining infinite-dimensional systems.
 
@@ -84,7 +109,6 @@ The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**�
 | Finding | Value | Target | Deviation |
 |---------|-------|--------|-----------|
 | NS depletion δ₀ | 0.309 | 1/(2φ) | < 1% |
-| Riemann GUE mode | 0.627 | 1/φ | 1.4% |
 | BSD Mazur bound | 12 | L(5)+1 | **EXACT** |
 | BSD missing torsion | 11 | L(5) | **EXACT** |
 | Hodge count ratio | 0.626 | 1/φ | 1.2% |
@@ -96,6 +120,13 @@ The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**�
 |---------|---------|------|
 | P vs NP base radius | 1/(2φ) = δ₀ | ~12% avg error |
 | P vs NP orbit scaling | ~φ² per snap | Dynamic structure |
+
+### Tier 3: Falsified
+
+| Finding | Claimed | Actual | Status |
+|---------|---------|--------|--------|
+| Riemann GUE mode | 1/φ = 0.618 | 0.664 | **FALSIFIED** |
+| Riemann 7.3× excess | Peak at 1/φ | No excess | **FALSIFIED** |
 
 [📄 Full Evidence Table](docs/EVIDENCE_TABLE.md)
 
