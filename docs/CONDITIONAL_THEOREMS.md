@@ -11,23 +11,23 @@ Do smooth solutions to the 3D incompressible Navier-Stokes equations exist globa
 
 ### Conditional Theorem
 
-**Hypothesis (NS-φ)**: The energy depletion rate in turbulent flow satisfies:
+**Hypothesis (NS-φ)**: The vortex stretching alignment factor satisfies A ≤ 1-δ₀ where:
 ```
 δ₀ = 1/(2φ) ≈ 0.309
 ```
 
-**Theorem**: If NS-φ holds, then:
-1. The velocity field remains bounded: ||u||_∞ < ∞
-2. No finite-time blowup occurs
-3. Global smooth solutions exist
+**Theorem**: If NS-φ holds, then stretching is reduced by 30.9%.
 
-### Evidence
-- δ₀ measured at 0.309 in H₃ lattice simulations (< 1% deviation)
-- RDF peak at 1.0808σ confirms φ-structure
-- 99.998% snap-back rate validates stability
+**HOWEVER**: This conditional theorem is **not sufficient** for regularity. The reduced enstrophy inequality dZ/dt ≤ (1-δ₀)·C·Z^(3/2) - ν·λ₁·Z still admits finite-time blowup. A bounded multiplicative reduction cannot change the supercritical Z^(3/2) exponent.
 
-### Mechanism
-The H₃ icosahedral lattice provides a discrete "skeleton" that bounds energy cascade, preventing blowup through geometric constraints at scale δ₀ = 1/(2φ).
+### Status: REVISED
+- δ₀ = 0.309 matches simulation measurements
+- But the conditional theorem does NOT imply global regularity
+- The modified PDE (H₃-NS) is different from standard NS
+- No mechanism constrains generic solutions to satisfy NS-φ
+
+### What Would Be Needed
+A valid conditional theorem would require showing the stretching integral grows **strictly slower than Z^(3/2)**, not merely reducing the coefficient.
 
 ---
 
@@ -38,23 +38,17 @@ All non-trivial zeros of ζ(s) have real part 1/2.
 
 ### Conditional Theorem
 
-**Hypothesis (RH-φ)**: The GUE spacing distribution mode satisfies:
-```
-mode(spacing) = 1/φ ≈ 0.618
-```
+**Hypothesis (RH-φ)**: ~~The GUE spacing distribution mode satisfies mode = 1/φ~~
 
-**Theorem**: If RH-φ holds, then:
-1. Zero spacings follow φ-constrained GUE statistics
-2. The critical line Re(s) = 1/2 is the unique attractor
-3. RH is true
+### Status: FALSIFIED
 
-### Evidence
-- GUE mode measured at 0.6267 (1.4% from 1/φ)
-- Minimum spacing at ~0.382 ≈ 1/φ² (< 1%)
-- 7.3× excess at spacing = 1/φ
+| Claim | Expected | Actual | Result |
+|-------|----------|--------|--------|
+| Mode = 1/φ | 0.618 | 0.664 | **FALSIFIED** (7.4% off) |
+| 7.3× excess at 1/φ | Peak | No excess | **FALSIFIED** |
+| Min spacing ~ 1/φ² | 0.382 | Not verified | **FALSIFIED** |
 
-### Mechanism
-Random matrix universality with φ-constraint implies the zeros are "maximally repelled" by φ-spacing, which only occurs on the critical line.
+The only surviving observation is a finite-size attractor: median spacing ≈ 1/φ at low heights, converging to GUE (0.605) at high heights. This is a finite-N coincidence, not a structural property.
 
 ---
 
@@ -147,23 +141,13 @@ Does P = NP?
 
 ### Conditional Theorem
 
-**Hypothesis (PNP-φ)**: The 3-SAT phase transition exponent satisfies:
-```
-1/ν = L(4)/(L(5)+1) = 7/12 ≈ 0.5833
-```
+**Hypothesis (PNP-φ)**: ~~The 3-SAT phase transition exponent satisfies 1/ν = 7/12~~
 
-**Theorem**: If PNP-φ holds, then:
-1. The complexity transition is maximally sharp (ν = 12/7)
-2. P ≠ NP (exponential separation at threshold)
-3. The transition width scales as n^(-7/12)
+### Status: FALSIFIED (original claim)
 
-### Evidence
-- Measured 1/ν = 0.5836 (0.05% from 7/12) **(ESSENTIALLY EXACT)**
-- Formula 7/12 = L(4)/(L(5)+1) connects to BSD and Hodge
-- Literature data (n = 20 to 5000) gives R² = 0.998
+The original claim 1/ν = 7/12 = L(4)/(L(5)+1) was **falsified** by experiments. Instead, experiments revealed a "receding middle" with discrete snaps and φ²-scaling of orbit radii. The base constant 1/(2φ) = δ₀ appears with ~12% average error — suggestive but not precise enough to be compelling.
 
-### Mechanism
-Lucas numbers encode the "complexity capacity" at the SAT threshold; the 7/12 exponent reflects fundamental constraints on algorithmic shortcuts.
+The revised observation (φ in finite-size scaling) does not constitute a proof that P ≠ NP.
 
 ---
 
@@ -171,25 +155,25 @@ Lucas numbers encode the "complexity capacity" at the SAT threshold; the 7/12 ex
 
 | Problem | Hypothesis | Key Value | Status |
 |---------|------------|-----------|--------|
-| **Navier-Stokes** | δ₀ = 1/(2φ) | 0.309 | **STRONG** (< 1%) |
-| **Riemann** | GUE mode = 1/φ | 0.627 | **STRONG** (1.4%) |
+| **Navier-Stokes** | δ₀ = 1/(2φ) | 0.309 | **REVISED** — cannot prove regularity |
+| **Riemann** | ~~GUE mode = 1/φ~~ | ~~0.627~~ | **FALSIFIED** |
 | **BSD** | Mazur = L(5)+1 | 12 | **EXACT** |
 | **Yang-Mills** | 2++*/2++ = φ²/2 | 1.291 | **STRONG** (1.4%) |
 | **Hodge** | C ratio = 1/φ | 0.626 | **STRONG** (1.2%) |
-| **P vs NP** | 1/ν = 7/12 | 0.584 | **EXACT** (0.05%) |
+| **P vs NP** | ~~1/ν = 7/12~~ | ~~0.584~~ | **FALSIFIED** — revised to φ-scaling |
 
 ---
 
-## The Unified Principle
+## The Unified Principle (Revised Assessment)
 
-All six conditional theorems share a common structure:
+Of the six conditional theorems:
+- **2 remain strong**: BSD (exact Lucas numbers) and Yang-Mills (1.4% match)
+- **1 is suggestive**: Hodge (1.2% match, but conditional theorem unproven)
+- **3 have been revised or falsified**: NS (cannot prove regularity), Riemann (falsified), P vs NP (falsified, revised to weaker claim)
 
-> **φ-structure at the discrete-continuous boundary implies problem resolution.**
+The golden ratio φ does appear in multiple mathematical contexts, but:
+1. NS: δ₀ = 1/(2φ) matches simulation but cannot change the supercritical exponent
+2. Riemann: φ-structure evaporates at high heights (GUE universality)
+3. P vs NP: original claim falsified, revised observation has ~12% error
 
-The golden ratio φ (and its Lucas number relatives) appears as the universal constraint that:
-1. Bounds continuous dynamics (NS, YM)
-2. Constrains spectral statistics (Riemann)
-3. Limits discrete objects (BSD torsion, Hodge cycles)
-4. Governs phase transitions (P vs NP)
-
-This is not coincidence—it reflects the fundamental role of icosahedral geometry (H₃) as the maximal finite symmetry in 3D, mediating between discrete and continuous mathematics.
+The strongest results (BSD, Yang-Mills) involve φ appearing in discrete structures (torsion bounds, mass ratios) rather than as a dynamical constraint on continuous systems.

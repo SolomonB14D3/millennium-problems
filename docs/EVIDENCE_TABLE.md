@@ -6,9 +6,9 @@
 
 | Problem | φ-Finding | Measured | φ-Target | Deviation | Status |
 |---------|-----------|----------|----------|-----------|--------|
-| **Navier-Stokes** | Depletion δ₀ | 0.309 | 1/(2φ) = 0.309 | **< 1%** | STRONG |
-| | RDF peak | 1.0808σ | σ×δ₀ = 1.081 | **0.1%** | STRONG |
-| | φ-clusters | 1.6205 | φ = 1.618 | **0.15%** | STRONG |
+| **Navier-Stokes** | Depletion δ₀ | 0.309 | 1/(2φ) = 0.309 | **< 1%** | **REVISED** |
+| | RDF peak | 1.0808σ | σ×δ₀ = 1.081 | **0.1%** | Observed |
+| | φ-clusters | 1.6205 | φ = 1.618 | **0.15%** | Observed |
 | **BSD** | Mazur bound | 12 | L(5)+1 | **EXACT** | STRONG |
 | | Missing torsion | 11 | L(5) | **EXACT** | STRONG |
 | | Decay rate λ | 0.59 ± 0.24 | 1/φ = 0.618 | ~5% | Consistent |
@@ -105,17 +105,16 @@ The "connection" to 1/φ evaporates at high heights — it was a finite-N coinci
 
 | Problem | Finding | Deviation |
 |---------|---------|-----------|
-| Navier-Stokes | δ₀ = 1/(2φ) | < 1% |
-| Navier-Stokes | RDF peak | 0.1% |
 | **BSD** | **Mazur = L(5)+1** | **EXACT** |
 | **BSD** | **Missing = L(5)** | **EXACT** |
 | Yang-Mills | 2++*/2++ ratio | 1.4% |
 | **Hodge** | CICY C(10)/C(9) = 1/φ | **1.2%** |
 
-### Tier 2: Revised (φ in finite-size scaling)
+### Tier 2: Revised (φ observed but doesn't prove what was claimed)
 
 | Problem | Finding | Note |
 |---------|---------|------|
+| **Navier-Stokes** | δ₀ = 1/(2φ) | Matches simulation, cannot prove NS regularity |
 | **P vs NP** | Base radius = 1/(2φ) | ~12% avg error |
 | **P vs NP** | Orbit scaling ~φ² | Dynamic, not static |
 | **Riemann** | Finite-size attractor = 1/φ | 0.2% deviation at low heights |
@@ -173,13 +172,13 @@ EXACT RELATIONSHIPS:
 | Metric | Value |
 |--------|-------|
 | Total findings | 17 |
-| **Strong (< 2% or exact)** | **8 (47%)** |
-| **Revised (φ in scaling)** | **4 (24%)** |
+| **Strong (< 2% or exact)** | **4 (24%)** |
+| **Revised (φ observed, not probative)** | **7 (41%)** |
 | Suggestive/Weak (>6%) | 1 (6%) |
 | Falsified (original claims) | 2 (12%) |
-| Moderate (2-6%) | 2 (12%) |
+| Moderate (2-6%) | 3 (18%) |
 
-**Problems with verified φ-structure**: 6 of 6 (P vs NP and Riemann show φ in finite-size scaling)
+**Problems with verified φ-structure**: 4 of 6 strong. NS, P vs NP, and Riemann have been revised.
 
 ## The Unified Principle
 
@@ -188,7 +187,7 @@ EXACT RELATIONSHIPS:
 ║                                                                        ║
 ║   φ appears at the boundary between DISCRETE and CONTINUOUS:           ║
 ║                                                                        ║
-║   • NS: H₃ lattice constrains fluid flow (δ₀ = 1/2φ)                  ║
+║   • NS: H₃ lattice shows δ₀ = 1/2φ (cannot prove regularity)           ║
 ║   • BSD: Torsion (discrete) suppresses rank (continuous)              ║
 ║   • YM: E₆→H₃ projection constrains gauge fields                      ║
 ║   • Hodge: Algebraic cycles constrain Hodge classes                   ║

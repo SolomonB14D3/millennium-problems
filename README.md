@@ -6,14 +6,46 @@
 
 | Problem | Key Result | Deviation | Status |
 |---------|------------|-----------|--------|
-| **Navier-Stokes** | δ₀ = 1/(2φ) = 0.309 | < 1% | STRONG |
+| **Navier-Stokes** | δ₀ = 1/(2φ) = 0.309 | < 1% | REVISED |
 | **Riemann Hypothesis** | Finite-size attractor = 1/φ | — | REVISED |
 | **Birch–Swinnerton-Dyer** | Mazur bound = L(5)+1 = 12 | EXACT | STRONG |
 | **Hodge Conjecture** | Count ratio = 1/φ | 1.2% | STRONG |
 | **Yang-Mills Mass Gap** | Glueball ratio = φ²/2 | 1.4% | STRONG |
 | **P vs NP** | Receding middle with δ₀ base, φ²-scaling | ~12% | REVISED |
 
-**Four problems show strong φ-structure (< 2% deviation or exact). P vs NP and Riemann show φ in finite-size scaling.**
+**Three problems show strong φ-structure (< 2% deviation or exact). P vs NP, Riemann, and Navier-Stokes have been revised.**
+
+---
+
+## Navier-Stokes: REVISED (January 2026)
+
+The H₃ depletion mechanism (δ₀ = 1/(2φ)) is a physically motivated modification of NS, but **cannot prove regularity** of the original equations. Rigorous analysis shows:
+
+### What Failed
+
+| Approach | Why It Fails |
+|----------|--------------|
+| Constant factor reduction | Z^(3/2) exponent unchanged — any c > 0 gives same blowup |
+| Nonlinear activation Φ(x) | Saturates at (1-δ₀) for large |ω| — still supercritical |
+| Constantin-Fefferman bridge | No mechanism forces generic solutions toward icosahedral directions |
+| Modified equations | H₃-NS ≠ NS — regularity of modified PDE says nothing about original |
+
+### The Core Issue
+
+The enstrophy bound dZ/dt ≤ C·Z^(3/2) - ν·λ₁·Z is supercritical. Multiplying the stretching by ANY bounded factor f ∈ [1-δ₀, 1] gives dZ/dt ≤ (1-δ₀)·C·Z^(3/2) - ν·λ₁·Z, which still admits finite-time blowup for large initial data. **A constant reduction cannot change criticality — the problem is the exponent 3/2, not the coefficient.**
+
+### What Remains
+
+- δ₀ = 1/(2φ) does match measured depletion in simulations (< 1%)
+- The modified PDE (H₃-NS) is a legitimate regularization for computational use
+- Vorticity-strain alignment IS observed to be sub-maximal in real flows
+- But none of this constitutes a proof of NS regularity
+
+### Numerical Tests Were Inconclusive
+
+The spectral solver with exponential integrating factor exp(-ν|k|²dt) is inherently stable — it cannot blow up regardless of physics. Control experiments (δ₀=0) also stay bounded, meaning the numerics prevent blowup, not the depletion mechanism.
+
+[📄 Full Analysis](problems/navier-stokes/)
 
 ---
 
@@ -94,7 +126,7 @@ The P vs NP Lucas connection was falsified. However, P vs NP still shows φ-stru
 
 | Problem | Discrete Structure | Continuous Dynamics | φ-Constraint |
 |---------|-------------------|---------------------|--------------|
-| Navier-Stokes | H₃ lattice | Fluid velocity | δ₀ = 1/(2φ) |
+| Navier-Stokes | H₃ lattice | Fluid velocity | δ₀ = 1/(2φ) (observed, not proven to bound) |
 | BSD | Torsion points | L-function rank | Mazur = L(5)+1 |
 | Yang-Mills | Gauge group | Mass spectrum | ratio ≈ φ²/2 |
 | Hodge | Algebraic cycles | Hodge classes | count ≈ 1/φ |
@@ -111,16 +143,16 @@ The golden ratio is the geometric signature of **icosahedral symmetry (H₃)**�
 
 | Finding | Value | Target | Deviation |
 |---------|-------|--------|-----------|
-| NS depletion δ₀ | 0.309 | 1/(2φ) | < 1% |
 | BSD Mazur bound | 12 | L(5)+1 | **EXACT** |
 | BSD missing torsion | 11 | L(5) | **EXACT** |
 | Hodge count ratio | 0.626 | 1/φ | 1.2% |
 | Yang-Mills 2++*/2++ | 1.291 | φ²/2 | 1.4% |
 
-### Tier 2: Revised (φ in finite-size scaling)
+### Tier 2: Revised (φ observed but doesn't prove what was claimed)
 
 | Finding | Formula | Note |
 |---------|---------|------|
+| NS depletion δ₀ | 1/(2φ) = 0.309 | Matches simulation, but cannot prove regularity |
 | P vs NP base radius | 1/(2φ) = δ₀ | ~12% avg error |
 | P vs NP orbit scaling | ~φ² per snap | Dynamic structure |
 | Riemann finite-size attractor | 1/φ | Median → 1/φ at low heights |
