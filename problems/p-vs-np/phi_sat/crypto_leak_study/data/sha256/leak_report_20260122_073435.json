@@ -1,0 +1,88 @@
+{
+  "levels_tested": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "strongest_leak_level": 1,
+  "strongest_leak_strength": 0.5,
+  "pattern_notes": "Leak strength decreases with level (expected)",
+  "results": [
+    {
+      "level": 1,
+      "num_samples": 500,
+      "accuracy": 1.0,
+      "bit_accuracies": [
+        1.0
+      ],
+      "random_baseline": 0.5,
+      "leak_strength": 0.5,
+      "best_features": [
+        "output_bits",
+        "timing"
+      ],
+      "training_time_s": 0.9047520160675049,
+      "notes": "Features used: 321"
+    },
+    {
+      "level": 2,
+      "num_samples": 500,
+      "accuracy": 1.0,
+      "bit_accuracies": [
+        1.0,
+        1.0
+      ],
+      "random_baseline": 0.5,
+      "leak_strength": 0.5,
+      "best_features": [
+        "output_bits",
+        "timing"
+      ],
+      "training_time_s": 0.08575797080993652,
+      "notes": "Features used: 321"
+    },
+    {
+      "level": 4,
+      "num_samples": 500,
+      "accuracy": 1.0,
+      "bit_accuracies": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "random_baseline": 0.5,
+      "leak_strength": 0.5,
+      "best_features": [
+        "output_bits",
+        "timing"
+      ],
+      "training_time_s": 0.08577680587768555,
+      "notes": "Features used: 321"
+    },
+    {
+      "level": 8,
+      "num_samples": 500,
+      "accuracy": 0.85875,
+      "bit_accuracies": [
+        0.85,
+        0.86,
+        0.88,
+        0.87,
+        0.82,
+        0.91,
+        0.81,
+        0.87
+      ],
+      "random_baseline": 0.5,
+      "leak_strength": 0.35875,
+      "best_features": [
+        "output_bits",
+        "timing"
+      ],
+      "training_time_s": 0.16321611404418945,
+      "notes": "Features used: 321"
+    }
+  ]
+}
